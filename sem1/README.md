@@ -5,7 +5,7 @@
 - [Настроим таб в VS Code, равный двум пробелам](https://stackoverflow.com/questions/29972396/how-can-i-customize-the-tab-to-space-conversion-factor)
 
 ## Введение в ОС Linux 
-[Ридинг по ввдедению в ОС Linux](https://github.com/victor-yacovlev/fpmi-caos/blob/master/practice/linux_basics/intro.md).
+[Ридинг по введению в ОС Linux](https://github.com/victor-yacovlev/fpmi-caos/blob/master/practice/linux_basics/intro.md).
 
 Можно «общаться» с ОС с помощью командной оболочки. Bash - стандартная оболочка в Linux, мы будем работать с ней. Все команды в bash имеют одинаковую структуру
 `сommand_name [options] [arguments]`.
