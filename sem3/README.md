@@ -33,7 +33,7 @@
 Дополнительно: [для чего нужен перенос строки в конце файла](https://semakin.dev/2020/05/no_newline_at_end_of_file/).
 
 Рассмотрим такой очень плохой код
-
+```C++
 // main.cpp
 
 #include <iostream>
@@ -55,10 +55,10 @@ int main() {
       std::cout << "kek";
   }
 }
-
+```
 Какие ошибки в нём есть? Вот что может сказать нам компилятор, если мы скомпилируем программу следующим образом
 c++ -Werror -Wextra -Wpedantic -Wall  -Wimplicit-fallthrough -Wconversion main.cpp:
-
+```C++
 main.cpp:5:16: error: implicit conversion changes signedness: 'int' to 'unsigned int' [-Werror,-Wsign-conversion]
   unsigned y = -1;
            ~   ^~
@@ -97,9 +97,9 @@ main.cpp:16:5: note: insert 'break;' to avoid fall-through
     ^
     break; 
 7 errors generated.
-
+```
 Скомпилируйте следующий код с флагами -Werror, -Wpedantic 
-
+```C++
 #include <iostream>
 
 int main() {
@@ -107,7 +107,7 @@ int main() {
   std::cin >> n;
   int array[n];
 }
-
+```
 
 Одна из ошибок
 ```C++
@@ -115,3 +115,4 @@ main.cpp:6:13: error: variable length arrays are a C99 feature [-Werror,-Wvla-ex
   int array[n];
             ^
 main.cpp:6:13: note: read of non-c
+```
