@@ -30,7 +30,7 @@
   bool* array = new bool[2];
   array[0] = true;
   array[1] = false;
-  std::cout << *(array + 1); // 0, то есть false
+  std::cout << *(array + 1); // OK, выведет 0, то есть false
 
   bool x = 'a';
   bool& px = x;
@@ -54,8 +54,10 @@ $f$ является «O» большим от $g$ при $x \rightarrow x_0$, �
 - Допустим, мы хотим вывести все элементы массива, а затем снова пройтись по всему массиву и занулить все элементы. Тогда мы сделаем $O(2N)$ операций, а сложностью алгоритма будем считать $O(N)$.
 
 ### Левосторонний и правосторонний бинарный поиск
+
+Вспомним, что правосторонний поиск по ключу $x$ находит такой наибольший индекс $i$, что $array[i] \le x$. Левосторонний поиск по ключу $x$ находит такой наименьший индекс $i$, что $array[i] \ge x$.
 ```C++
-int binarySearchLeft(const int* arr, const int arr_size, const int key) {
+int BinarySearchLeft(const int* arr, const int arr_size, const int key) {
   int left_board = -1;
   int right_board = arr_size;
   int middle;
@@ -72,7 +74,7 @@ int binarySearchLeft(const int* arr, const int arr_size, const int key) {
   return right_board;
 }
 
-int binarySearchRight(const int* arr, const int arr_size, const int key) {
+int BinarySearchRight(const int* arr, const int arr_size, const int key) {
   int left_board = -1;
   int right_board = arr_size;
   int middle;
