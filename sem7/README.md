@@ -60,7 +60,133 @@ void MergeSort(T begin, T end, T result) {
 
 #### InplaceMergeSort
 
-TBD
+Пока что не в терминах begin-end и без шаблонов (TBD)
+
+```C++
+void Swap(int& lhs, int& rhs) {
+  int tmp = lhs;
+  lhs = rhs;
+  rhs = tmp;
+}
+
+int* LowerBound(int* begin, int* end, int value) {
+  int size = end - begin;
+  int* it;
+  while (size > 0) {
+    it = begin;
+    int step = size / 2;
+    it += step;
+    if (*it < value) {
+      begin = ++it;
+      size -= step + 1;
+    } else {
+      size = step;
+    }
+  }
+  return begin;
+}
+
+int* UpperBound(int* begin, int* end, int value) {
+  int size = end - begin;
+  int* it;
+  while (size > 0) {
+    it = begin;
+    int step = size / 2;
+    it += step;
+    if (value >= *it) {
+      begin = ++it;
+      size -= step + 1;
+    } else {
+      size = step;
+    }
+  }
+  return begin;
+}
+
+void Reverse(int* begin, int* end) {
+  if (begin + 1 == end) {
+    return;
+  }
+
+  while (begin < end) {
+    Swap(*(begin++), *(--end));
+  }
+}
+
+void Rotate(int* begin, int* mid, int* end) {
+  Reverse(begin, mid);
+  Reverse(mid, end);
+  Reverse(begin, end);
+}
+
+
+void InplaceMerge(int* first_beg, int* first_end, int* second_beg, int* second_end) {
+  size_t first_part_size = first_end - first_beg;
+  size_t second_part_size = second_end - second_beg;
+
+  if (!first_part_size || !second_part_size) {
+    return;
+  }
+
+  if (first_part_size == 1 && second_part_size == 1) {
+    if (*first_beg > *second_beg) {
+      Swap(*first_beg, *second_beg);
+    }
+    return;
+  }
+
+  int* B1_beg = first_beg;
+  int* B1_end;
+
+  int* B2_beg;
+  int* B3_beg = second_beg;
+
+  int* B3_end;
+
+  int* B4_beg;
+  int* B4_end = second_end;
+
+  if (first_part_size >= second_part_size) {
+    B1_end = B1_beg + first_part_size / 2;
+    B2_beg = B1_end;
+    int* sep = LowerBound(second_beg, second_end, *B2_beg);
+    B3_end = sep;
+    B4_beg = sep;
+  } else {
+    B3_end = B3_beg + second_part_size / 2;
+    B4_beg = B3_end;
+    int* sep = UpperBound(first_beg, first_end, *B4_beg);
+    B1_end = sep;
+    B2_beg = sep;
+  }
+
+  Rotate(B2_beg, B3_beg, B3_end);
+  size_t B3_size = B3_end - B3_beg;
+  InplaceMerge(B1_beg, B1_end, B2_beg, B2_beg + B3_size);
+  InplaceMerge(B2_beg + B3_size, B3_end, B4_beg, B4_end);
+}
+
+void MergeSortImpl(int* begin, int* end) {
+  size_t size = end - begin;
+
+  if (size <= 1) {
+    return;
+  }
+
+  MergeSortImpl(begin, begin + size / 2);
+  MergeSortImpl(begin + size / 2, end);
+
+  InplaceMerge(begin, begin + size / 2, begin + size / 2, end);
+}
+
+void MergeSort(int* begin, int* end) {
+  size_t size = end - begin;
+  if (size <= 1) {
+    return;
+  }
+  MergeSortImpl(begin, end);
+}
+```
 
 #### Почему нельзя писать реализацию шаблонных функций в .cpp файлах
 
