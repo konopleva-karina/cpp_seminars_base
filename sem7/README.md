@@ -63,18 +63,20 @@ void MergeSort(T begin, T end, T result) {
 Пока что не в терминах begin-end и без шаблонов (TBD)
 
 ```C++
-void Swap(int& lhs, int& rhs) {
+template <typename T>
+void Swap(T& lhs, T& rhs) {
   int tmp = lhs;
   lhs = rhs;
   rhs = tmp;
 }
 
-int* LowerBound(int* begin, int* end, int value) {
-  int size = end - begin;
-  int* it;
+template <typename T, typename U>
+T LowerBound(T begin, T end, U value) {
+  int64_t size = end - begin;
+  T it;
   while (size > 0) {
     it = begin;
-    int step = size / 2;
+    int64_t step = size / 2;
     it += step;
     if (*it < value) {
       begin = ++it;
@@ -86,14 +88,15 @@ int* LowerBound(int* begin, int* end, int value) {
   return begin;
 }
 
-int* UpperBound(int* begin, int* end, int value) {
-  int size = end - begin;
-  int* it;
+template <typename T, typename U>
+T UpperBound(T begin, T end, U value) {
+  int64_t size = end - begin;
+  T it;
   while (size > 0) {
     it = begin;
-    int step = size / 2;
+    int64_t step = size / 2;
     it += step;
-    if (value >= *it) {
+    if (*it <= value) {
       begin = ++it;
       size -= step + 1;
     } else {
@@ -103,7 +106,8 @@ int* UpperBound(int* begin, int* end, int value) {
   return begin;
 }
 
-void Reverse(int* begin, int* end) {
+template <typename T>
+void Reverse(T begin, T end) {
   if (begin + 1 == end) {
     return;
   }
@@ -113,49 +117,50 @@ void Reverse(int* begin, int* end) {
   }
 }
 
-void Rotate(int* begin, int* mid, int* end) {
+template <typename T>
+void Rotate(T begin, T mid, T end) {
   Reverse(begin, mid);
   Reverse(mid, end);
   Reverse(begin, end);
 }
 
-
-void InplaceMerge(int* first_beg, int* first_end, int* second_beg, int* second_end) {
+template <typename T>
+void InplaceMerge(T first_beg, T first_end, T second_beg, T second_end) {
   size_t first_part_size = first_end - first_beg;
   size_t second_part_size = second_end - second_beg;
 
-  if (!first_part_size || !second_part_size) {
+  if (first_part_size == 0 || second_part_size == 0) {
     return;
   }
 
   if (first_part_size == 1 && second_part_size == 1) {
-    if (*first_beg > *second_beg) {
+    if (*second_beg < *first_beg) {
       Swap(*first_beg, *second_beg);
     }
     return;
   }
 
-  int* B1_beg = first_beg;
-  int* B1_end;
+  T B1_beg = first_beg;
+  T B1_end;
 
-  int* B2_beg;
-  int* B3_beg = second_beg;
+  T B2_beg;
+  T B3_beg = second_beg;
 
-  int* B3_end;
+  T B3_end;
 
-  int* B4_beg;
-  int* B4_end = second_end;
+  T B4_beg;
+  T B4_end = second_end;
 
   if (first_part_size >= second_part_size) {
     B1_end = B1_beg + first_part_size / 2;
     B2_beg = B1_end;
-    int* sep = LowerBound(second_beg, second_end, *B2_beg);
+    T sep = LowerBound(second_beg, second_end, *B2_beg);
     B3_end = sep;
     B4_beg = sep;
   } else {
     B3_end = B3_beg + second_part_size / 2;
     B4_beg = B3_end;
-    int* sep = UpperBound(first_beg, first_end, *B4_beg);
+    T sep = UpperBound(first_beg, first_end, *B4_beg);
     B1_end = sep;
     B2_beg = sep;
   }
@@ -166,25 +171,19 @@ void InplaceMerge(int* first_beg, int* first_end, int* second_beg, int* second_e
   InplaceMerge(B2_beg + B3_size, B3_end, B4_beg, B4_end);
 }
 
-void MergeSortImpl(int* begin, int* end) {
+
+template <typename T>
+void MergeSort(T begin, T end) {
   size_t size = end - begin;
 
   if (size <= 1) {
     return;
   }
 
-  MergeSortImpl(begin, begin + size / 2);
-  MergeSortImpl(begin + size / 2, end);
+  MergeSort(begin, begin + size / 2);
+  MergeSort(begin + size / 2, end);
 
   InplaceMerge(begin, begin + size / 2, begin + size / 2, end);
-}
-
-void MergeSort(int* begin, int* end) {
-  size_t size = end - begin;
-  if (size <= 1) {
-    return;
-  }
-  MergeSortImpl(begin, end);
 }
 ```
 
