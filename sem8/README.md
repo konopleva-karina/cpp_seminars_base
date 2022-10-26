@@ -21,7 +21,7 @@ int RightChild(int i) {
 }
 
 int Parent(int i) {
-  return i / 2;
+  return (i - 1) / 2;
 }
 ```
 
