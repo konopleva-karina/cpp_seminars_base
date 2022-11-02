@@ -56,7 +56,7 @@ void SiftDown(T begin, T end, int64_t i) {
 template <typename T>
 void BuildHeap(T begin, T end) {
   int64_t size = end - begin;
-  for (int64_t i = size / 2; i >= 0; --i) {
+  for (int64_t i = size / 2 - 1; i >= 0; --i) {
     SiftDown(begin, end, i);
   }
 }
