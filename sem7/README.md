@@ -4,12 +4,11 @@
 
 ```C++
 template <typename T>
-T Copy(const T begin, const T end, T result) {
-  for (int i = 0; begin + i != end; ++i) {
-    *result = begin[i];
-    ++result;
+T* Copy(const T* src_begin, const T* src_end, T* dest) {
+  while (src_begin != src_end) {
+    *dest++ = *src_begin++;
   }
-  return result;
+  return dest;
 }
 
 template <typename T>
