@@ -12,60 +12,65 @@
 Для каждого узла $i$ можно подсчитать его левого, правого ребёнка и родителя (если они существуют). Здесь индексация начинается с $0$.
 
 ```C++
-int LeftChild(int i) {
+int64_t LeftChild(int64_t i) {
   return 2 * i + 1;
 }
 
-int RightChild(int i) {
+int64_t RightChild(int64_t i) {
   return 2 * i + 2;
 }
 
-int Parent(int i) {
-  return i / 2;
+int64_t Parent(int64_t i) {
+  return (i - 1) / 2;
 }
 ```
 
 *Пирамида (heap)* - почти полное бинарное дерево, удовлетворящее "основному свойству пирамиды", то есть
-- `Heap[Parent(i)] >= Heap[i] $\forall i \in$ [0, heap_size]` - такая пирамида называется невозрастающей
-- `Heap[Parent(i)] >= Heap[i] $\forall i \in$ [0, heap_size]` для неубывающей пирамиды
+- $Heap[Parent(i)] >= Heap[i]\ \forall i \in [0, heapSize]$ - такая пирамида называется невозрастающей
+- $Heap[Parent(i)] <= Heap[i]\ \forall i \in [0, heapSize]$ - такая пирамида называется неубывающей
 
 #### Поддержка свойства пирамиды
 
 ```C++
-void SiftDown(int* heap, int size, int i) {
-  int left = LeftChild(i);
-  int right = RightChild(i);
-  int largest = i;
-  if (left < size && heap[left] > heap[largest]) {
+template <typename T>
+void SiftDown(T begin, T end, int64_t i) {
+  int64_t size = end - begin;
+  int64_t left = LeftChild(i);
+  int64_t right = RightChild(i);
+  int64_t largest = i;
+  if (left < size && *(begin + largest) < *(begin + left)) {
     largest = left;
   }
-  if (right < size && heap[right] > heap[largest]) {
+  if (right < size && *(begin + largest) < *(begin + right)) {
     largest = right;
   }
   if (largest != i) {
-    Swap(heap[i], heap[largest]);
-    SiftDown(heap, size, largest);
+    Swap(*(begin + i), *(begin + largest));
+    SiftDown(begin, end, largest);
   }
 }
 ```
 
 #### Построение пирамиды
 ```C++
-void BuildHeap(int* arr, int size) {
-  for (int i = size / 2; i >= 0; --i) {
-    SiftDown(arr, size, i);
+template <typename T>
+void BuildHeap(T begin, T end) {
+  int64_t size = end - begin;
+  for (int64_t i = size / 2 - 1; i >= 0; --i) {
+    SiftDown(begin, end, i);
   }
 }
 ```
 #### HeapSort
 
 ```C++
-void HeapSort(int* arr, int size) {
-  BuildHeap(int* arr, int size);
-  for (int i = size; i >= 1; --i) {
-    Swap(arr[0], arr[i]);
-    --size;
-    SiftDown(arr, size, 0);
+template <typename T>
+void HeapSort(T begin,  T end) {
+  BuildHeap(begin, end);
+  int64_t size = end - begin;
+  for (int64_t i = size - 1; i >= 1; --i) {
+    Swap(*begin, *(begin + i));
+    SiftDown(begin, --end, 0);
   }
 }
 ```
