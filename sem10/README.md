@@ -9,11 +9,13 @@
 
 Допустим, мы хотим написать задачу о сложении двух чисел, назовём наш репозиторий sum.
 
-!(file:///Users/proskurin-d/Desktop/pic2.png)[pic]
-
 <p align="center">
-  <img src="file:///Users/proskurin-d/Desktop/pic2.png" width="350" title="hover text">
-  <img src="file:///Users/proskurin-d/Desktop/pic2.png" width="350" alt="accessibility text">
+  <img src="https://github.com/konopleva-karina/cpp_seminars_base/blob/main/sem10/pic2.png" width="500" title="создание пустого репозитория">
 </p>
 
+4. Теперь клонируем репозиторий по  SSH
+
+<p align="center">
+  <img src="https://github.com/konopleva-karina/cpp_seminars_base/blob/main/sem10/pic2.png" width="500" title="создание пустого репозитория">
+</p>
 
