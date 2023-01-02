@@ -40,7 +40,7 @@ int main() {
 
 `const bool is_positive = (n >= 0) ? true : false;`
 
-### Оператор `swich`
+### Оператор `switch`
 
 Смотрим и разбираем [презентацию с лекции](https://docs.yandex.ru/docs/view?url=ya-disk-public%3A%2F%2FjjmCa5bP3BIA6WYDVc4Osk2mqQoUGaEz5lZgwh1AtVx5j8aMq8F3bfwCGrlzxFkEq%2FJ6bpmRyOJonT3VoXnDag%3D%3D%3A%2F02-Variables%26Expressions%26Statements%2FConditional.pdf&name=Conditional.pdf&nosw=1).
 
