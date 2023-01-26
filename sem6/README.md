@@ -295,3 +295,5 @@ std::cout << str; // I'll dance dance dance with my hands
   delete[] arr;
 ```
 
+size_t определен и в других библиотеках, например, в cstddef (странно подключатть cstring, если нужен только size_t). 
+Подробнее про size_t на [cppreference](https://en.cppreference.com/w/cpp/types/size_t).
