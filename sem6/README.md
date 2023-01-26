@@ -210,8 +210,9 @@ for (int i = 0; i < 3; ++i) {
   str2 = str; // CE
 ```
 
-Функции для работы со строками определены в заголовочном файле `cstring`. Основные из них:
-1. strlen вычисляет длину строки без учета терминального символа
+##### [Функции для работы со строками](https://cplusplus.com/reference/cstring/) 
+Определены в заголовочном файле `cstring`. Основные из них:
+1. `strlen` вычисляет длину строки без учета терминального символа
 
 ```C++
   char str[]{"abc"};
@@ -219,6 +220,78 @@ for (int i = 0; i < 3; ++i) {
   std::cout << sizeof(str) << '\n'; // 4
 ```
 
-`Замечание`
+Замечание: strlen работает за линию от длины строки, поэтому не используйте её в условии выхода из циклов. 
+Пример ниже отработает за квадрат от длины строки!
 
+```C++
+  char str[]{"Hello world!"};
+  for (size_t i = 0; i < strlen(str); ++i) {
+    std::cout << str[i];
+  }
+```
+
+Работает за линию:
+
+```C++
+  char str[]{"Hello world!"};
+  size_t len = strlen(str);
+  for (size_t i = 0; i < len; ++i) {
+    std::cout << str[i];
+  }
+```
+
+2. `strcmp` сравнивает две строки str1 и str2 в лексикографическом порядке и возвращает
+* 0, если строки равны
+* значение < 0, если str1 < str2
+* значение > 0, если str1 > str2
+
+```C++
+  char str1[]{"abc"};
+  char str2[]{"adc"};
+  std::cout << strcmp(str1, str1); // 0
+  std::cout << strcmp(str1, str2); // -2
+  std::cout << strcmp(str2, str1); // 2
+```
+
+3. `strcpy(char* dest, const char* src)` копирует строку src в dest
+
+```C++
+char str[256];
+strcpy(str, "I'll dance dance dance with my hands");
+std::cout << str; // I'll dance dance dance with my hands
+```
+
+4. `strcat(char* dest, const char* src)` добавляет копию строки src в конец строки dest
+
+```C++
+  char str[]{"Hello"};
+  strcat(str," world!");
+  std::cout << str; // Hello world!
+```
+
+5. `strstr(const char* str1, const char* str2)` находит первое вхождение строки str2 в строке str2 и 
+возвращает указатель на него, иначе возвращает nullptr
+
+```C++
+  char str[]{"Hello world!"};
+
+  char* world_ptr = strstr(str, "world");
+  std::cout << world_ptr - str; // 6
+
+  char* kek_ptr = strstr(str, "kek");
+  std::cout << (kek_ptr == nullptr); // 1
+```
+
+##### size_t
+
+Это беззнаковый целочисленный тип. Он же возвращается из функции sizeof(), size_t можно использовать для итерации по массиву:
+
+```C++
+  size_t len = 10;
+  int* arr = new int[len];
+  for (size_t i = 0; i < len; ++i) {
+    std::cin >> arr[i];
+  }
+  delete[] arr;
+```
 
