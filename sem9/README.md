@@ -4,6 +4,8 @@
 
 #### Стек
 
+[Реализация](https://github.com/konopleva-karina/cpp_seminars_base/blob/main/sem9/stack/stack.cpp)
+
 На самом деле на прошлых семинарах мы уже говорили про стек. Например, упоминали стек вызовов, когда разбирали рекурсию.
 
 Посмотрите на картинку
@@ -18,6 +20,8 @@
 
 ![](https://github.com/konopleva-karina/cpp_seminars_base/blob/main/sem9/stack/stack_push.png)
 #### Очередь
+
+[Реализация](https://github.com/konopleva-karina/cpp_seminars_base/blob/main/sem9/queue/queue.cpp)
 
 С очередью каждый встречался в обычной жизни, например, с очередью на кассу в магазине. Новые элементы приходят в конец очереди,
 достаём из очереди элементы, стоящие в начале. То есть очередь организована по принципу FIFO (first in, first out). 
