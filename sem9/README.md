@@ -7,6 +7,7 @@
 На самом деле на прошлых семинарах мы уже говорили про стек. Например, упоминали стек вызовов, когда разбирали рекурсию.
 
 Посмотрите на картинку
+
 ![](https://github.com/konopleva-karina/cpp_seminars_base/blob/main/sem9/stack/stack.png)
 
 
@@ -15,7 +16,7 @@
 
 Вот как происходит добавление в стек:
 
-![](https://github.com/konopleva-karina/cpp_seminars_base/blob/main/sem9/stack/pop_stack.png)
+![](https://github.com/konopleva-karina/cpp_seminars_base/blob/main/sem9/stack/stack_push.png)
 #### Очередь
 
 С очередью каждый встречался в обычной жизни, например, с очередью на кассу в магазине. Новые элементы приходят в конец очереди,
@@ -26,4 +27,4 @@
 
 Добавление в очередь:
 
-![](https://github.com/konopleva-karina/cpp_seminars_base/blob/main/sem9/queue/queue_pop.png)
+![](https://github.com/konopleva-karina/cpp_seminars_base/blob/main/sem9/queue/queue_push.png)
